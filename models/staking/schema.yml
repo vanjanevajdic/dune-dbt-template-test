@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: epoch_info
+  - name: staking_native
+  - name: staking_jito
+  - name: staking_revenue
