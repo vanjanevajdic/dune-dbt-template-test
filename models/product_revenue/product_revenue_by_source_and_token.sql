@@ -6,8 +6,6 @@
     ) 
 }}
 
-{% set start_date = var('start_date', '2023-06-01') %}
-{% set lookback_days = var('lookback_days', 3) %}
 
 with
 prices as (
@@ -19,10 +17,10 @@ prices as (
     where
         blockchain = 'solana'
         and symbol in ('SOL', 'WETH')
-        and timestamp >= timestamp '{{ start_date }}'
+        and timestamp >= timestamp '{{ var("start_date") }}'
         {% if is_incremental() %}
         and timestamp >= (
-            select date_add('day', -{{ lookback_days }}, max(date))
+            select date_add('day', -{{ var("lookback_days") }}, max(date))
             from {{ this }}
         )
         {% endif %}
@@ -72,10 +70,10 @@ fees_raw as (
     from solana.account_activity a
     join mapping m on a.address = m.address
     where
-        a.block_time >= timestamp '{{ start_date }}'
+        a.block_time >= timestamp '{{ var("start_date") }}'
         {% if is_incremental() %}
         and a.block_time >= (
-            select date_add('day', -{{ lookback_days }}, max(date))
+            select date_add('day', -{{ var("lookback_days") }}, max(date))
             from {{ this }}
         )
         {% endif %}

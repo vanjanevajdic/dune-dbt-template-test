@@ -29,8 +29,12 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 # Default incremental lookback for all models
+# staking_epoch_offset: first Voting reward row is treated as this Solana epoch (epoch_info)
+# start_date: lower bound for product_revenue and staking_native (YYYY-MM-DD)
 vars:
   lookback_days: 3
+  staking_epoch_offset: 132
+  start_date: '2023-06-01'
 
 models:
   dune_dbt_trial:

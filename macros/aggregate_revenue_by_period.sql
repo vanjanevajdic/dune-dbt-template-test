@@ -7,7 +7,7 @@ select
     sum(case when token = 'weth' then usd_amount else 0 end) as eth_usd_amount,
     sum(case when token = 'usdc' then usd_amount else 0 end) as usdc_amount,
     sum(usd_amount) as total_usd_amount
-from {{ ref('daily_revenue_by_source_and_token') }}
+from {{ ref('unified_revenue') }}
 {% if is_incremental() %}
 where
     date >= (

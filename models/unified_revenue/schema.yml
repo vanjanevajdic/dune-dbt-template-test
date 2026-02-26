@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: daily_revenue_by_source_and_token
+  - name: unified_revenue
   - name: daily_unified_revenue
   - name: weekly_unified_revenue
   - name: monthly_unified_revenue
