@@ -3,8 +3,8 @@
     materialized = 'table'
 ) }}
 
-select date, fee_source, token, usd_price, amount, usd_amount
-from {{ ref('product_revenue_by_source_and_token') }}
+select date, fee_type, fee_source, token, usd_price, amount, usd_amount
+from {{ ref('product_revenue') }}
 union
-select date, fee_source, token, usd_price, amount, usd_amount
+select date, fee_type, fee_source, token, usd_price, amount, usd_amount
 from {{ ref('staking_revenue') }}
