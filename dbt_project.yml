@@ -28,6 +28,10 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+# Default incremental lookback for all models
+vars:
+  lookback_days: 3
+
 models:
   dune_dbt_trial:
     # Config indicated by + and applies to all files under models/templates/
