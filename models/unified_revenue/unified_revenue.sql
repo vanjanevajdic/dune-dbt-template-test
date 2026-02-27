@@ -1,14 +1,22 @@
 {{ config(
     alias = 'unified_revenue',
-    materialized = 'table'
+    materialized = 'incremental',
+    incremental_strategy = 'merge',
+    unique_key = ['date', 'type']
 ) }}
 
 with base as (
     select date, fee_type, token, usd_price, amount, usd_amount
     from {{ ref('product_revenue') }}
+    {% if is_incremental() %}
+    where date >= (select date_add('day', -{{ var('lookback_days') }}, max(date)) from {{ this }})
+    {% endif %}
     union all
     select date, fee_type, token, usd_price, amount, usd_amount
     from {{ ref('staking_revenue') }}
+    {% if is_incremental() %}
+    where date >= (select date_add('day', -{{ var('lookback_days') }}, max(date)) from {{ this }})
+    {% endif %}
 ),
 aggregated as (
     select
