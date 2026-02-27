@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: product_revenue
+    description: Daily fee revenue by product (swap, limit_order, bridge, etc.), source, and token (SOL, WSOL, USDC, WETH), with USD amounts from on-chain account activity.

@@ -2,6 +2,10 @@ version: 2
 
 models:
   - name: epoch_info
+    description: Solana epoch boundaries derived from Voting rewards; used to map block times to epoch numbers for staking metrics.
   - name: staking_native
+    description: Daily native staking rewards (Fee, Rent, Voting) in SOL for the Solflare validator, from on-chain rewards.
   - name: staking_jito
+    description: Jito MEV rewards in SOL per epoch for the Solflare validator, from the Jito API.
   - name: staking_revenue
+    description: Daily staking revenue in SOL and USD, combining native and Jito rewards with SOL price.
