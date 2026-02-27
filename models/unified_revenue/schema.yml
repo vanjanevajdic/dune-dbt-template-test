@@ -3,6 +3,14 @@ version: 2
 models:
   - name: unified_revenue
     description: Revenue aggregated by date and fee type (product + staking), with SOL amount, SOL price USD, SOL USD, USDC amount, and total USD.
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns: ['date', 'type']
+    columns:
+      - name: date
+        tests: [not_null]
+      - name: type
+        tests: [not_null]
   - name: daily_unified_revenue
     description: Daily rollup of unified revenue (SOL, USDC, and total USD).
   - name: weekly_unified_revenue
