@@ -11,7 +11,7 @@
 
 with voting_rewards as (
     select block_time
-    from solana.rewards
+    from {{ source('solana', 'rewards') }}
     where reward_type = 'Voting'
     {% if is_incremental() %}
         and block_time > (select max(epoch_end_time) from {{ this }})

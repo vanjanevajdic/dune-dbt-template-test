@@ -8,7 +8,7 @@
 select
     date_trunc('day', block_time) as date,
     sum(lamports) / power(10, 9) as amount_sol
-from solana.rewards
+from {{ source('solana', 'rewards') }}
 where
     recipient in (
         '722RdWmHC5TGXBjTejzNjbc8xEiduVDLqZvoUGz6Xzbp', -- solflare validator identity key

@@ -69,7 +69,7 @@ fees_raw as (
                 then a.balance_change / power(10, 9)
             else a.token_balance_change
         end as raw_amount
-    from solana.account_activity a
+    from {{ source('solana', 'account_activity') }} a
     join mapping m on a.address = m.address
     where
         a.block_time >= timestamp '{{ var("start_date") }}'

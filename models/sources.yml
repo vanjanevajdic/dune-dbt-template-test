@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: solana
+    tables:
+      - name: rewards
+      - name: account_activity
